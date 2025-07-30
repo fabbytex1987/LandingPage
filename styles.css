@@ -1,0 +1,250 @@
+/* General */
+body {
+  font-family: sans-serif;
+  background-color: #fffdf7;
+  color: #3a2e2e;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  padding: 2rem 1rem;
+  background: #fff1e6;
+}
+
+.producto,
+.producto-detalle {
+  margin: 2rem auto;
+  padding: 1rem;
+  max-width: 500px;
+  width: 90%;
+}
+
+.producto img,
+.producto-detalle img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto;
+}
+
+.boton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background-color: #af8260;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+footer {
+  padding: 2rem 1rem;
+  background: #ffeedd;
+  font-size: 0.9rem;
+}
+
+/* Carrusel principal */
+.carrusel {
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.carrusel img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+.controles {
+  margin-top: 5px;
+}
+
+.controles button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Testimonios */
+.testimonios {
+  padding: 2rem;
+  background-color: #fdf6f0;
+  text-align: center;
+}
+
+.testimonios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.testimonio {
+  background-color: #fff9f9;
+  border-radius: 1rem;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.testimonio img {
+  width: 100%;
+  height: 300px;
+  object-fit: contain;  /* importante para que se muestre la imagen completa sin recortar */
+  border-radius: 1rem;
+  background-color: #f3f3f3;
+}
+
+.testimonio .nombre {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #d1708f;
+}
+
+.testimonio .comentario {
+  font-style: italic;
+  margin-top: 0.3rem;
+  color: #555;
+}
+
+/* Selector de colores */
+.color-selection {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.color-option {
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.color-option img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.color-option img:hover {
+  transform: scale(1.05);
+  border-color: #a0522d; /* marrón suave para indicar selección */
+}
+
+.color-option p {
+  margin-top: 6px;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+  user-select: none;
+}
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.color-option {
+  text-align: center;
+  width: 90px;
+}
+
+.color-option img {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.color-option img:hover {
+  transform: scale(1.05);
+}
+
+.color-option p {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+.carousel-container {
+  width: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  margin: 20px 0;
+}
+
+.carousel-wrapper {
+  display: flex;
+}
+
+.carousel {
+  display: flex;
+  gap: 16px;
+  padding: 10px;
+  scroll-snap-align: start;
+}
+
+.carousel-slide {
+  flex: 0 0 auto;
+  width: 120px;
+  text-align: center;
+  position: relative;
+  scroll-snap-align: center;
+  cursor: pointer;
+}
+
+.carousel-slide img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.color-label {
+  display: block;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.info-compra, .flujo-compra, .faq {
+  background-color: #fff7f2;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.info-compra ul, .flujo-compra ol {
+  margin-left: 1rem;
+}
+
+.faq p {
+  margin-bottom: 1rem;
+}

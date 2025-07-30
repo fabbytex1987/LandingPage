@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abrigo Flowers</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>🧥 Abrigo Flowers Largo</h1>
+    <p>Cálido, elegante y único. Ideal para días fríos con mucho estilo.</p>
+  </header>
+
+  <main>
+    <section class="producto-detalle">
+      <div class="carrusel">
+        <img id="producto-img" src="" alt="Producto" />
+        <p id="nombre-color" style="font-weight:bold; margin-top:10px;"></p>
+        <div class="controles">
+          <button onclick="cambiarImagen(-1)">←</button>
+          <button onclick="cambiarImagen(1)">→</button>
+        </div>
+      </div>
+
+      <p>Explora los colores disponibles y encuentra el que más te identifique.</p>
+
+      <div class="selector-talla">
+        <label for="talla">Selecciona tu talla:</label>
+        <select id="talla">
+          <option value="">-- Elegir talla --</option>
+          <option value="XS">XS (Muy Pequeña)</option>
+          <option value="S">S (Pequeña)</option>
+          <option value="M">M (Mediana)</option>
+          <option value="L">L (Grande)</option>
+          <option value="XL">XL (Extra grande)</option>
+          <option value="XXL">XXL (Doble Extra grande)</option>
+        </select>
+      </div>
+
+      <button class="boton" onclick="enviarWhatsApp()">🛒 Encargar por WhatsApp</button>
+      <button class="boton secundario" onclick="toggleInformacion()">📄 Datos para comprar</button>
+
+      <!-- Sección desplegable con información -->
+      <div id="informacion-compra" style="display: none; margin-top: 1rem;">
+        <section class="info-compra">
+          <h2>🛍️ Detalles importantes antes de tu compra</h2>
+          <ul>
+            <li><strong>💰 Precio Incluye ENVIO:</strong> $24,99 USD (hecho a medida, con detalles únicos).</li>
+            <li><strong>🧵 Confección y Entrega:</strong> 24 a 72 horas tras tu confirmación.</li>
+            </ul>
+        </section>
+
+        <section class="flujo-compra">
+          <h3>🧭 ¿Cómo encargar tu prenda?</h3>
+          <ol>
+            <li>Elige color</li>
+            <li>Selecciona talla</li>
+            <li>Haz clic en WhatsApp</li>
+            <li>¡Te atenderemos personalmente!</li>
+          </ol>
+        </section>
+
+        <section class="faq">
+          <h3>❓ Preguntas frecuentes</h3>
+          <p><strong>¿Pago contra entrega?</strong><br>No, trabajamos por pedido con transferencia previa.</p>
+          <p><strong>¿Y si no me queda?</strong><br>Puedes cambiarla cubriendo solo el envío. Te ayudamos a elegir bien.</p>
+        </section>
+      </div>
+
+      <a href="../index.html" class="boton">← Volver al inicio</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
+  </footer>
+
+  <script>
+    const extensiones = [".webp", ".png", ".jpg", ".jpeg"];
+    const maxColores = 7;
+    const producto = "abrigo";
+    let indice = 1;
+    let imagenActual = "";
+
+    const nombresColores = [
+      "Beige",
+      "Negro",
+      "Terracota",
+      "Café",
+      "Verde Militar",
+      "Azul Marino",
+      "Palo de Rosa",
+    ];
+
+    function cambiarImagen(direccion) {
+      indice += direccion;
+      if (indice > maxColores) indice = 1;
+      if (indice < 1) indice = maxColores;
+      cargarImagen(indice);
+    }
+
+    function cargarImagen(num) {
+      const imgElement = document.getElementById("producto-img");
+      const nombreColorElement = document.getElementById("nombre-color");
+      const basePath = `../assets/images/${producto}/${producto}_color${num}`;
+      probarExtension(basePath, 0, imgElement, nombreColorElement, num);
+    }
+
+    function probarExtension(basePath, index, imgElement, nombreColorElement, num) {
+      if (index >= extensiones.length) {
+        console.error("No se encontró una imagen válida para:", basePath);
+        imgElement.alt = "Imagen no disponible";
+        nombreColorElement.textContent = "";
+        return;
+      }
+
+      const testSrc = basePath + extensiones[index];
+      const testImg = new Image();
+      testImg.onload = () => {
+        imgElement.src = testSrc;
+        imgElement.alt = nombresColores[num - 1];
+        nombreColorElement.textContent = `Color: ${nombresColores[num - 1]}`;
+        imagenActual = testSrc;
+      };
+      testImg.onerror = () => {
+        probarExtension(basePath, index + 1, imgElement, nombreColorElement, num);
+      };
+      testImg.src = testSrc;
+    }
+
+    function enviarWhatsApp() {
+      const talla = document.getElementById("talla").value;
+      if (!talla) {
+        alert("Por favor, selecciona una talla antes de continuar.");
+        return;
+      }
+
+      const color = nombresColores[indice - 1];
+      const numeroWhatsApp = "593968604535";
+      const urlImagen = `${window.location.origin}/${imagenActual.replace("../", "")}`;
+
+      const mensaje = `¡Hola! Quiero ordenar un *Abrigo Flowers*.\n👗 Talla: ${talla}\n🎨 Color: ${color}\n🖼️ Imagen: ${urlImagen}`;
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    }
+
+    function toggleInformacion() {
+      const info = document.getElementById("informacion-compra");
+      info.style.display = (info.style.display === "none" || info.style.display === "") ? "block" : "none";
+    }
+
+    window.onload = () => cargarImagen(indice);
+  </script>
+</body>
+</html>

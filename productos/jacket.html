@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jacket Flowers</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>🌸 Jacket Flowers corto</h1>
+    <p>Perfecto para el día a día. Versátil, cómodo y lleno de personalidad.</p>
+  </header>
+
+  <main>
+    <section class="producto-detalle">
+      <div class="carrusel">
+        <img id="producto-img" src="" alt="Producto" />
+        <div class="controles">
+          <button onclick="cambiarImagen(-1)">←</button>
+          <button onclick="cambiarImagen(1)">→</button>
+        </div>
+      </div>
+
+      <!-- Aquí agrego un párrafo para mostrar el nombre del color actual -->
+      <p id="nombre-color" style="font-weight: bold; margin-top: 10px;"></p>
+
+      <p>Explora los 6 colores disponibles y encuentra el que más refleje tu esencia.</p>
+
+      <label for="talla">Selecciona tu talla:</label>
+      <select id="talla">
+        <option value="">-- Selecciona --</option>
+        <option value="XS">S (Muy Pequeña)</option>
+        <option value="S">S (Pequeña)</option>
+        <option value="M">M (Mediana)</option>
+        <option value="L">L (Grande)</option>
+        <option value="XL">XL (Extra grande)</option>
+        <option value="XXL">XXL (Doble Extra grande)</option>
+      </select>
+
+      <button class="boton" onclick="ordenarWhatsApp()">🛍️ Ordenar por WhatsApp</button>
+      <a href="../index.html" class="boton">← Volver al inicio</a>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
+  </footer>
+
+  <script>
+    const extensiones = [".webp", ".png", ".jpg", ".jpeg"];
+    const maxColores = 4;
+    const producto = "jacket";
+    let indice = 1;
+    let imagenSeleccionada = "";
+
+    const nombresColores = [
+      "Camel",
+      "Beige",
+      "Negro",
+      "Café",
+        ];
+
+    function cambiarImagen(direccion) {
+      indice += direccion;
+      if (indice > maxColores) indice = 1;
+      if (indice < 1) indice = maxColores;
+      cargarImagen(indice);
+    }
+
+    function cargarImagen(num) {
+      const imgElement = document.getElementById("producto-img");
+      const nombreColorElement = document.getElementById("nombre-color");
+      const basePath = `../assets/images/${producto}/${producto}_color${num}`;
+      probarExtension(basePath, 0, imgElement, nombreColorElement, num);
+    }
+
+    function probarExtension(basePath, index, imgElement, nombreColorElement, num) {
+      if (index >= extensiones.length) {
+        console.error("No se encontró una imagen válida para:", basePath);
+        imgElement.alt = "Imagen no disponible";
+        nombreColorElement.textContent = "";
+        return;
+      }
+
+      const testSrc = basePath + extensiones[index];
+      const testImg = new Image();
+      testImg.onload = () => {
+        imgElement.src = testSrc;
+        imgElement.alt = nombresColores[num - 1];
+        nombreColorElement.textContent = `Color: ${nombresColores[num - 1]}`;
+        imagenSeleccionada = testSrc;
+      };
+      testImg.onerror = () => {
+        probarExtension(basePath, index + 1, imgElement, nombreColorElement, num);
+      };
+      testImg.src = testSrc;
+    }
+
+    function ordenarWhatsApp() {
+      const talla = document.getElementById("talla").value;
+      if (!talla) {
+        alert("Por favor, selecciona una talla.");
+        return;
+      }
+
+      const color = nombresColores[indice - 1];
+      const numero = "593968604535"; // Tu número
+      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${window.location.origin + imagenSeleccionada.replace("..", "")}`;
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, "_blank");
+    }
+
+    window.onload = () => cargarImagen(indice);
+  </script>
+</body>
+</html>
