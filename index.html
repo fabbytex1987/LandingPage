@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jacket Flowers</title>
-  <link rel="stylesheet" href="../styles.css" />
-  
+  <link rel="stylesheet" href="styles.css" />
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
   <script>
@@ -14,88 +14,142 @@
     gtag('js', new Date());
     gtag('config', 'G-EKL0NZ9LVN');
 
+    // Evento para botón WhatsApp
     function trackWhatsappClick() {
-      gtag('event', 'whatsapp_click', {
+      gtag('event', 'click_whatsapp', {
         'event_category': 'conversion',
-        'event_label': 'Botón WhatsApp'
+        'event_label': 'WhatsApp desde home'
       });
     }
 
+    // Evento para formulario
     function trackLeadSubmit() {
-      gtag('event', 'formulario_enviado', {
-        'event_category': 'conversion',
+      gtag('event', 'lead_submit', {
+        'event_category': 'formulario',
         'event_label': 'Formulario de contacto'
       });
     }
+
+    // Evento de scroll al 50%
+    window.addEventListener('scroll', function() {
+      const scrollY = window.scrollY;
+      const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollY / pageHeight) * 100;
+
+      if (scrollPercent > 50 && !window.scrollTracked) {
+        gtag('event', 'scroll_50', {
+          'event_category': 'engagement',
+          'event_label': 'Scroll 50% completado'
+        });
+        window.scrollTracked = true;
+      }
+    });
+
+    // Captura y envío de parámetros UTM
+    window.addEventListener('load', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const utm_source = urlParams.get('utm_source');
+      const utm_medium = urlParams.get('utm_medium');
+      const utm_campaign = urlParams.get('utm_campaign');
+
+      if (utm_source || utm_medium || utm_campaign) {
+        gtag('event', 'utm_capture', {
+          'event_category': 'utm_tracking',
+          'event_label': 'Parámetros UTM detectados',
+          'utm_source': utm_source,
+          'utm_medium': utm_medium,
+          'utm_campaign': utm_campaign
+        });
+      }
+    });
   </script>
 
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "mcwdfx9tp2");
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "sn9scd20px");
   </script>
 </head>
 
 <body>
-
+  <header>
+    <h1>🌸 Jacket Flowers</h1>
+    <p>No sigas modas. Crea momentos.</p>
+    <p>Elige tu estilo y déjate envolver por lo natural y auténtico.</p>
+  </header>
 
   <main>
+    <!-- Abrigo -->
     <section class="producto">
-      <h2>Abrigo Floral Largo</h2>
-      <img src="../img/abrigo_largo.jpg" alt="Abrigo largo floral">
-      <a href="productos/abrigo.html" class="boton" onclick="gtag('event', 'ver_mas_producto', {
-        'event_category': 'interaccion',
-        'event_label': 'Abrigo Floral Largo'
-      });">Ver más</a>
+      <div class="imagen-principal">
+        <img src="assets/images/abrigo/abrigo_habano.png" alt="Abrigo color 1" />
+      </div>
+      <h2>Abrigo Floral Largo 3/4</h2>
+      <p>Ideal para momentos especiales. Cálido, elegante y único.</p>
+      <a href="productos/abrigo.html" class="boton">Ver más</a>
     </section>
 
+    <!-- Jacket -->
     <section class="producto">
-      <h2>Jacket Flowers Corto</h2>
-      <img src="../img/jacket_corto.jpg" alt="Jacket corto floral">
-      <a href="productos/jacket.html" class="boton" onclick="gtag('event', 'ver_mas_producto', {
-        'event_category': 'interaccion',
-        'event_label': 'Jacket Flowers Corto'
-      });">Ver más</a>
+      <div class="imagen-principal">
+        <img src="assets/images/jacket/jacket_terracota.png" alt="Jacket color 1" />
+      </div>
+      <h2>Jacket Flowers corto</h2>
+      <p>Perfecto para el día a día. Versátil, cómodo y lleno de personalidad.</p>
+      <a href="productos/jacket.html" class="boton">Ver más</a>
     </section>
 
+    <!-- Testimonios -->
     <section class="testimonios">
-      <h2>Lo que dicen nuestras clientas</h2>
-      <p>"Me siento divina con esta chaqueta!" - Camila</p>
-      <p>"El diseño floral me hace sentir única 🌸" - Daniela</p>
+      <h2>✨ Lo que dicen nuestras clientas</h2>
+      <div class="testimonios-grid">
+        <div class="testimonio">
+          <img src="assets/images/testimonios/cliente1.jpg" alt="Testimonio 1">
+          <p class="nombre">Doris.</p>
+          <p class="comentario">"¡Llego! La Jacket Flowers refleja mi esencia. 🧡"</p>
+        </div>
+        <div class="testimonio">
+          <img src="assets/images/testimonios/cliente2.jpg" alt="Testimonio 2">
+          <p class="nombre">Maria de la Cruz</p>
+          <p class="comentario">"Es para un regalo, la persona que la recibe estara muy feliz."</p>
+        </div>
+        <div class="testimonio">
+          <img src="assets/images/testimonios/cliente3.jpg" alt="Testimonio 3">
+          <p class="nombre">Sandra Valdez.</p>
+          <p class="comentario">"Todos me preguntan dónde la compré. ¡Esta hermosa la chaqueta! 😍"</p>
+        </div>
+        <div class="testimonio">
+          <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 3">
+          <p class="nombre">Post Facebook.</p>
+          <p class="comentario">"Acaso existe algo mas bello que los lindos comentarios cuando reciben sus Jacket Flowers version Abrigo 😍"</p>
+        </div>
+      </div>
     </section>
 
+    <!-- WhatsApp -->
+    <section class="contacto">
+      <h2>¿Tienes dudas o quieres tu chaqueta?</h2>
+      <a href="https://wa.me/593XXXXXXXXX?text=Hola!%20Quiero%20más%20info%20sobre%20las%20chaquetas" 
+         class="boton" 
+         onclick="trackWhatsappClick()">Escríbenos por WhatsApp</a>
+    </section>
+
+    <!-- Formulario (opcional) -->
     <section class="formulario">
-      <h2>¿Quieres más información?</h2>
+      <h2>Recibe novedades exclusivas</h2>
       <form onsubmit="trackLeadSubmit()">
-        <input type="text" placeholder="Tu nombre" required />
-        <input type="email" placeholder="Tu correo" required />
-        <button type="submit">Enviar</button>
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo" required>
+        <button type="submit">Suscribirme</button>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Jacket Flowers</p>
+    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
   </footer>
-
-  <!-- Evento personalizado: scroll hasta testimonios -->
-  <script>
-    window.addEventListener('scroll', function() {
-      const testimonios = document.querySelector('.testimonios');
-      if (!testimonios) return;
-      const testimoniosPos = testimonios.getBoundingClientRect().top;
-      const screenHeight = window.innerHeight;
-
-      if (testimoniosPos < screenHeight) {
-        gtag('event', 'scroll_testimonios', {
-          'event_category': 'interaccion',
-          'event_label': 'Sección Testimonios vista'
-        });
-      }
-    }, { once: true });
-  </script>
 </body>
 </html>
