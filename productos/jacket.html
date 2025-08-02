@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Jacket Flowers</title>
   <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EKL0NZ9LVN');
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+    fbq('init', '1280001277161893'); // Reemplaza con tu Pixel ID si es distinto
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"
+    />
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "sn9scd20px");
+  </script>
 </head>
 
 <body>
@@ -23,7 +61,6 @@
         </div>
       </div>
 
-      <!-- Aquí agrego un párrafo para mostrar el nombre del color actual -->
       <p id="nombre-color" style="font-weight: bold; margin-top: 10px;"></p>
 
       <p>Explora los 6 colores disponibles y encuentra el que más refleje tu esencia.</p>
@@ -60,7 +97,7 @@
       "Beige",
       "Negro",
       "Café",
-        ];
+    ];
 
     function cambiarImagen(direccion) {
       indice += direccion;
@@ -106,9 +143,21 @@
       }
 
       const color = nombresColores[indice - 1];
-      const numero = "593968604535"; // Tu número
-      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${window.location.origin + imagenSeleccionada.replace("..", "")}`;
+      const numero = "593968604535";
+      const urlImagen = `${window.location.origin}/${imagenSeleccionada.replace("../", "")}`;
+
+      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${urlImagen}`;
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+      // EVENTO para Meta Pixel
+      fbq('track', 'Contact');
+
+      // EVENTO para Google Analytics
+      gtag('event', 'click_whatsapp_jacket', {
+        'event_category': 'conversion',
+        'event_label': 'Jacket - botón WhatsApp'
+      });
+
       window.open(url, "_blank");
     }
 
