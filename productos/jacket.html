@@ -149,20 +149,29 @@
       const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${urlImagen}`;
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
-      // EVENTO para Meta Pixel
-    fbq('track', 'Contact');
+      // EVENTO para Meta Pixel con chequeo
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', {
+          content_name: 'Jacket Flowers',
+          content_category: 'Abrigos',
+          value: 1,
+          currency: 'USD'
+        });
+      }
 
-// EVENTO para Google Analytics
-gtag('event', 'click_whatsapp_jacket', {
-  'event_category': 'conversion',
-  'event_label': 'Jacket - botón WhatsApp'
-});
+      // EVENTO para Google Analytics
+      gtag('event', 'click_whatsapp_jacket', {
+        'event_category': 'conversion',
+        'event_label': 'Jacket - botón WhatsApp'
+      });
 
-// Espera 300ms para que el evento se envíe antes de abrir WhatsApp
-setTimeout(() => {
-  window.open(url, "_blank");
-}, 300);
+      // Espera 500ms para enviar eventos antes de abrir WhatsApp
+      setTimeout(() => {
+        window.open(url, "_blank");
+      }, 500);
+    }
 
+    // Cargar imagen inicial al cargar la página
     window.onload = () => cargarImagen(indice);
   </script>
 </body>
