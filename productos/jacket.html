@@ -150,16 +150,18 @@
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
       // EVENTO para Meta Pixel
-      fbq('track', 'Contact');
+    fbq('track', 'Contact');
 
-      // EVENTO para Google Analytics
-      gtag('event', 'click_whatsapp_jacket', {
-        'event_category': 'conversion',
-        'event_label': 'Jacket - botón WhatsApp'
-      });
+// EVENTO para Google Analytics
+gtag('event', 'click_whatsapp_jacket', {
+  'event_category': 'conversion',
+  'event_label': 'Jacket - botón WhatsApp'
+});
 
-      window.open(url, "_blank");
-    }
+// Espera 300ms para que el evento se envíe antes de abrir WhatsApp
+setTimeout(() => {
+  window.open(url, "_blank");
+}, 300);
 
     window.onload = () => cargarImagen(indice);
   </script>
