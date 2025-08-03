@@ -9,6 +9,26 @@
   <title>Jacket Flowers</title>
   <link rel="stylesheet" href="styles.css" />
 
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
+    n.queue=[]; t=b.createElement(e); t.async=!0;
+    t.src='https://connect.facebook.net/en_US/fbevents.js';
+    s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script');
+    
+    fbq('init', '1280001277161893');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
@@ -23,6 +43,7 @@
         'event_category': 'conversion',
         'event_label': 'WhatsApp desde home'
       });
+      fbq('track', 'Contact'); // Evento personalizado para Meta
     }
 
     // Evento para formulario
