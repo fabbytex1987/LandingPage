@@ -6,13 +6,13 @@
   <title>Abrigo Flowers</title>
   <link rel="stylesheet" href="../styles.css" />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
+  <!-- Google Analytics 4 (usa el MISMO ID que tu index para no fragmentar medición) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EKL0NZ9LVN');
+    gtag('config', 'G-QE5BRPJKCV');
   </script>
 
   <!-- Meta Pixel Code -->
@@ -25,12 +25,14 @@
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
-    fbq('init', '1280001277161893'); // Reemplaza con tu Pixel ID
+    fbq('init', '1280001277161893');
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"
-  /></noscript>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"
+    />
+  </noscript>
   <!-- End Meta Pixel Code -->
 
   <!-- Microsoft Clarity -->
@@ -179,15 +181,29 @@
       const mensaje = `¡Hola! Quiero ordenar un *Abrigo Flowers*.
 👗 Talla: ${talla}
 🎨 Color: ${color}
-🖼þ Imagen: ${urlImagen}`;
+🖼️ Imagen: ${urlImagen}`;
+
       const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
-      fbq('track', 'Contact');
-      gtag('event', 'click_whatsapp_abrigo', {
-        'event_category': 'conversion',
-        'event_label': 'Abrigo - botón WhatsApp'
+      // Meta Pixel: Contact + parámetro para poder crear conversión personalizada "WhatsApp"
+      fbq('track', 'Contact', {
+        contact_method: 'whatsapp',
+        product: 'abrigo',
+        size: talla,
+        color: color,
+        page: window.location.pathname
       });
 
+      // GA4
+      gtag('event', 'click_whatsapp', {
+        event_category: 'conversion',
+        event_label: 'Abrigo - botón WhatsApp',
+        product: 'abrigo',
+        size: talla,
+        color: color
+      });
+
+      // Abrir WhatsApp (nueva pestaña)
       window.open(url, "_blank");
     }
 
