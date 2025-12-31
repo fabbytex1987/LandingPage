@@ -6,13 +6,13 @@
   <title>Jacket Flowers</title>
   <link rel="stylesheet" href="../styles.css" />
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
+  <!-- Google Analytics 4 (usa el MISMO ID que tu index para no fragmentar medición) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EKL0NZ9LVN');
+    gtag('config', 'G-QE5BRPJKCV');
   </script>
 
   <!-- Meta Pixel Code -->
@@ -25,7 +25,7 @@
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
-    fbq('init', '1280001277161893'); // Reemplaza con tu Pixel ID si es distinto
+    fbq('init', '1280001277161893');
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -63,12 +63,12 @@
 
       <p id="nombre-color" style="font-weight: bold; margin-top: 10px;"></p>
 
-      <p>Explora los 6 colores disponibles y encuentra el que más refleje tu esencia.</p>
+      <p>Explora los 4 colores disponibles y encuentra el que más refleje tu esencia.</p>
 
       <label for="talla">Selecciona tu talla:</label>
       <select id="talla">
         <option value="">-- Selecciona --</option>
-        <option value="XS">S (Muy Pequeña)</option>
+        <option value="XS">XS (Muy Pequeña)</option>
         <option value="S">S (Pequeña)</option>
         <option value="M">M (Mediana)</option>
         <option value="L">L (Grande)</option>
@@ -143,32 +143,36 @@
       }
 
       const color = nombresColores[indice - 1];
-      const numero = "593968604535";
+      const numeroWhatsApp = "593968604535";
       const urlImagen = `${window.location.origin}/${imagenSeleccionada.replace("../", "")}`;
 
-      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${urlImagen}`;
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:
+👕 Color: ${color}
+📏 Talla: ${talla}
+📸 Imagen del modelo: ${urlImagen}`;
 
-      // EVENTO para Meta Pixel con chequeo
-      if (typeof fbq === 'function') {
-        fbq('track', 'Contact', {
-          content_name: 'Jacket Flowers',
-          content_category: 'Abrigos',
-          value: 1,
-          currency: 'USD'
-        });
-      }
+      const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
 
-      // EVENTO para Google Analytics
-      gtag('event', 'click_whatsapp_jacket', {
-        'event_category': 'conversion',
-        'event_label': 'Jacket - botón WhatsApp'
+      // Meta Pixel: Contact + parámetro para conversión personalizada "WhatsApp"
+      fbq('track', 'Contact', {
+        contact_method: 'whatsapp',
+        product: 'jacket',
+        size: talla,
+        color: color,
+        page: window.location.pathname
       });
 
-      // Espera 500ms para enviar eventos antes de abrir WhatsApp
-      setTimeout(() => {
-        window.open(url, "_blank");
-      }, 500);
+      // GA4 (usa un único evento y añade parámetros)
+      gtag('event', 'click_whatsapp', {
+        event_category: 'conversion',
+        event_label: 'Jacket - botón WhatsApp',
+        product: 'jacket',
+        size: talla,
+        color: color
+      });
+
+      // Abrir WhatsApp (nueva pestaña)
+      window.open(url, "_blank");
     }
 
     // Cargar imagen inicial al cargar la página
