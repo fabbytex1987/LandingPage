@@ -20,6 +20,7 @@
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
     
+
     fbq('init', '1280001277161893');
     fbq('track', 'PageView');
   </script>
@@ -38,20 +39,46 @@
     gtag('config', 'G-QE5BRPJKCV');
 
     // Evento para botón WhatsApp
-    function trackWhatsappClick() {
+    function trackWhatsappClick() 
+    // Evento para botón WhatsApp (GA4 + Meta)
+    function trackWhatsappClick(e) {
+      // 1) GA4
       gtag('event', 'click_whatsapp', {
         'event_category': 'conversion',
         'event_label': 'WhatsApp desde home'
+        event_category: 'conversion',
+        event_label: 'WhatsApp desde home'
+      });
+
+      // 2) Meta Pixel (evento estándar Contact + parámetro)
+      fbq('track', 'Contact', {
+        contact_method: 'whatsapp',
+        page: window.location.pathname
       });
       fbq('track', 'Contact'); // Evento personalizado para Meta
+
+      // 3) Asegurar que el evento se envíe antes de salir a WhatsApp (recomendado)
+      if (e && e.currentTarget && e.currentTarget.href) {
+        e.preventDefault();
+        const url = e.currentTarget.href;
+        setTimeout(() => { window.location.href = url; }, 180);
+      }
     }
 
     // Evento para formulario
-    function trackLeadSubmit() {
+    function trackLeadSubmit() 
+    // Evento para formulario (GA4)
+    function trackLeadSubmit(e) {
       gtag('event', 'lead_submit', {
         'event_category': 'formulario',
         'event_label': 'Formulario de contacto'
+        event_category: 'formulario',
+        event_label: 'Formulario de contacto'
       });
+      // (Opcional) Si quieres también medir Lead en Meta:
+      // fbq('track', 'Lead');
+      // Si tu formulario no debe recargar la página, descomenta:
+      // e.preventDefault();
     }
 
     // Evento de scroll al 50%
@@ -64,12 +91,15 @@
         gtag('event', 'scroll_50', {
           'event_category': 'engagement',
           'event_label': 'Scroll 50% completado'
+          event_category: 'engagement',
+          event_label: 'Scroll 50% completado'
         });
         window.scrollTracked = true;
       }
     });
 
     // Captura y envío de parámetros UTM
+    // Captura y envío de parámetros UTM (GA4)
     window.addEventListener('load', function() {
       const urlParams = new URLSearchParams(window.location.search);
       const utm_source = urlParams.get('utm_source');
@@ -83,6 +113,11 @@
           'utm_source': utm_source,
           'utm_medium': utm_medium,
           'utm_campaign': utm_campaign
+          event_category: 'utm_tracking',
+          event_label: 'Parámetros UTM detectados',
+          utm_source: utm_source,
+          utm_medium: utm_medium,
+          utm_campaign: utm_campaign
         });
       }
     });
@@ -100,16 +135,28 @@
 
 <body>
   <header>
-    <h1>🌸 Jacket Flowers</h1>
+    <h1>🌸 ÑukawaStudio </h1>
     <p>No sigas modas. Crea momentos.</p>
     <p>Elige tu estilo y déjate envolver por lo natural y auténtico.</p>
   </header>
 
   <main>
+    <!-- Botón principal de WhatsApp (Home) -->
+    <!-- IMPORTANTE: Reemplaza el número por tu WhatsApp en formato internacional sin + -->
+    <section style="text-align:center; margin: 18px 0;">
+      <a
+        href="https://wa.me/593968604535?text=Hola%20me%20interesa%20Jacket%20Flowers"
+        class="boton"
+        onclick="trackWhatsappClick(event)"
+      >
+        Hablar por WhatsApp
+      </a>
+    </section>
+
     <!-- Abrigo -->
     <section class="producto">
       <div class="imagen-principal">
-        <img src="assets/images/abrigo/abrigo_habano.png" alt="abrigo_habano" />
+        <img src="assets/images/abrigo/abrigo_color1.jpeg" alt="abrigo_color1" />
       </div>
       <h2>Abrigo Floral Largo 3/4</h2>
       <p>Ideal para momentos especiales. Cálido, elegante y único.</p>
@@ -124,6 +171,16 @@
       <h2>Jacket Flowers corto</h2>
       <p>Perfecto para el día a día. Versátil, cómodo y lleno de personalidad.</p>
       <a href="productos/jacket.html" class="boton">Ver más</a>
+    </section>
+
+    <!-- >Abrigo de Botones -->
+    <section class="producto">
+      <div class="imagen-principal">
+        <img src="assets/images/botones/Abrigo_Beige.jpeg" alt="Abrigo_Beige.jpeg" />
+      </div>
+      <h2>Abrigo Elegante con Botones</h2>
+      <p>Diseñado para brindarte calidez, elegancia y comodidad en cada momento.</p>
+      <a href="productos/botones.html" class="boton">Ver más</a>
     </section>
 
     <!-- Testimonios -->
@@ -147,6 +204,7 @@
         </div>
         <div class="testimonio">
           <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 3" />
+          <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 4" />
           <p class="nombre">Post Facebook.</p>
           <p class="comentario">"Acaso existe algo mas bello que los lindos comentarios cuando reciben sus Jacket Flowers version Abrigo 😍"</p>
         </div>
@@ -157,6 +215,7 @@
     <section class="formulario">
       <h2>Recibe novedades exclusivas</h2>
       <form onsubmit="trackLeadSubmit()">
+      <form onsubmit="trackLeadSubmit(event)">
         <input type="text" name="nombre" placeholder="Tu nombre" required />
         <input type="email" name="email" placeholder="Tu correo" required />
         <button type="submit">Suscribirme</button>
@@ -165,7 +224,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
+    <p>&copy; 2026 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
   </footer>
 </body>
 </html>

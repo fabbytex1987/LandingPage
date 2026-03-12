@@ -233,18 +233,3 @@ footer {
   font-weight: bold;
   font-size: 14px;
 }
-.info-compra, .flujo-compra, .faq {
-  background-color: #fff7f2;
-  padding: 1rem 1.5rem;
-  border-radius: 10px;
-  margin-top: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-}
-
-.info-compra ul, .flujo-compra ol {
-  margin-left: 1rem;
-}
-
-.faq p {
-  margin-bottom: 1rem;
-}

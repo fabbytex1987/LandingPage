@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Abrigo Flowers</title>
+<link rel="stylesheet" href="../styles.css" />
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EKL0NZ9LVN');
+</script>
+
+<!-- Meta Pixel -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src='https://connect.facebook.net/en_US/fbevents.js';
+s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script');
+
+fbq('init', '1280001277161893');
+fbq('track', 'PageView');
+</script>
+
+<!-- Microsoft Clarity -->
+<script>
+(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "sn9scd20px");
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>🡕 Abrigo con Botones </h1>
+<p>Elegancia y abrigo en una sola prenda, simplemente perfecta ..</p>
+</header>
+
+<main>
+
+<section class="producto-detalle">
+
+<div class="carrusel">
+
+<img id="producto-img" src="" alt="Producto"/>
+
+<p id="nombre-color" style="font-weight:bold; margin-top:10px;"></p>
+
+<div class="controles">
+<button onclick="cambiarImagen(-1)">←</button>
+<button onclick="cambiarImagen(1)">→</button>
+</div>
+
+</div>
+
+<p>Explora los colores disponibles y encuentra el que más te identifique.</p>
+
+<div class="selector-talla">
+
+<label for="talla">Selecciona tu talla:</label>
+
+<select id="talla">
+
+<option value="">-- Elegir talla --</option>
+<option value="XS">XS (Muy Pequeña)</option>
+<option value="S">S (Pequeña)</option>
+<option value="M">M (Mediana)</option>
+<option value="L">L (Grande)</option>
+<option value="XL">XL (Extra grande)</option>
+<option value="XXL">XXL (Doble Extra grande)</option>
+
+</select>
+
+</div>
+
+<button class="boton" onclick="enviarWhatsApp()">🛒 Encargar por WhatsApp</button>
+<button class="boton secundario" onclick="toggleInformacion()">📄 Datos para comprar</button>
+
+<div id="informacion-compra" style="display:none;margin-top:1rem;">
+
+<h3>Detalles antes de comprar</h3>
+<p>Precio con envío: <strong>$24,99</strong></p>
+<p>Entrega: 24 a 72 horas</p>
+
+</div>
+
+<a href="../index.html" class="boton">← Volver al inicio</a>
+
+</section>
+
+</main>
+
+<footer>
+<p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo 🌿</p>
+</footer>
+
+<script>
+
+const imagenes = [
+{archivo:"Abrigo_AzulMarin.jpeg", color:"Azul Marino"},
+{archivo:"Abrigo_Beige.jpeg", color:"Beige"},
+{archivo:"Abrigo_CafeOscuro.jpeg", color:"Café Oscuro"},
+{archivo:"Abrigo_Gris.jpeg", color:"Gris"},
+{archivo:"Abrigo_Hueso.jpeg", color:"Hueso"},
+{archivo:"Abrigo_Mostaza.jpeg", color:"Mostaza"},
+{archivo:"Abrigo_Negro.jpeg", color:"Negro"},
+{archivo:"Abrigo_VerdeM.jpeg", color:"Verde Militar"},
+{archivo:"Abrigo_Vino.jpeg", color:"Vino"}
+];
+
+const producto = "botones";
+
+let indice = 0;
+let imagenActual = "";
+
+function cambiarImagen(direccion){
+
+indice += direccion;
+
+if(indice >= imagenes.length) indice = 0;
+if(indice < 0) indice = imagenes.length - 1;
+
+cargarImagen();
+
+}
+
+function cargarImagen(){
+
+const img = document.getElementById("producto-img");
+const nombreColor = document.getElementById("nombre-color");
+
+const imagen = imagenes[indice];
+
+const ruta = `../assets/images/${producto}/${imagen.archivo}`;
+
+img.src = ruta;
+img.alt = imagen.color;
+
+nombreColor.textContent = `Color: ${imagen.color}`;
+
+imagenActual = ruta;
+
+}
+
+function enviarWhatsApp(){
+
+const talla = document.getElementById("talla").value;
+
+if(!talla){
+alert("Selecciona una talla antes de continuar");
+return;
+}
+
+const color = imagenes[indice].color;
+
+const numero = "593968604535";
+
+const urlImagen = `${window.location.origin}/${imagenActual.replace("../","")}`;
+
+const mensaje = `Hola quiero ordenar este Abrigo Flowers
+
+Talla: ${talla}
+Color: ${color}
+Imagen: ${urlImagen}`;
+
+const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+fbq('track','Contact');
+
+gtag('event','click_whatsapp_abrigo',{
+event_category:'conversion',
+event_label:'Abrigo WhatsApp'
+});
+
+window.open(url,"_blank");
+
+}
+
+function toggleInformacion(){
+
+const info = document.getElementById("informacion-compra");
+
+info.style.display = (info.style.display === "none" || info.style.display === "")
+? "block"
+: "none";
+
+}
+
+window.onload = cargarImagen;
+
+</script>
+
+</body>
+</html>
