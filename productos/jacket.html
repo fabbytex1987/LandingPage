@@ -26,12 +26,12 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-QE5BRPJKCV');
   </script>
 
-  <!-- Meta Pixel Code -->
+  <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -54,10 +54,9 @@
       alt=""
     />
   </noscript>
-  <!-- End Meta Pixel Code -->
 
   <!-- Microsoft Clarity -->
-  <script type="text/javascript">
+  <script>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -138,8 +137,10 @@
     function probarExtension(basePath, index, imgElement, nombreColorElement, num) {
       if (index >= extensiones.length) {
         console.error("No se encontró una imagen válida para:", basePath);
+        imgElement.removeAttribute("src");
         imgElement.alt = "Imagen no disponible";
         nombreColorElement.textContent = "";
+        imagenSeleccionada = "";
         return;
       }
 
@@ -170,7 +171,9 @@
 
       const color = nombresColores[indice - 1];
       const numero = "593968604535";
-      const urlImagen = `${window.location.origin}/${imagenSeleccionada.replace("../", "")}`;
+      const urlImagen = imagenSeleccionada
+        ? `${window.location.origin}/${imagenSeleccionada.replace("../", "")}`
+        : "";
 
       const mensaje = `Hola 👋, me interesa la Jacket Flowers corto de ÑukawaStudio.
 
@@ -180,21 +183,27 @@ Imagen del modelo: ${urlImagen}`;
 
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
-      if (typeof fbq === 'function') {
-        fbq('track', 'Contact', {
-          content_name: 'Jacket Flowers corto',
-          content_category: 'Jacket',
-          value: 1,
-          currency: 'USD',
-          contact_method: 'whatsapp',
+      if (typeof fbq === "function") {
+        fbq("track", "InitiateCheckout", {
+          content_name: "Jacket Flowers corto",
+          content_category: "Jacket",
+          content_type: "product",
+          value: 24.99,
+          currency: "USD"
+        });
+
+        fbq("track", "Contact", {
+          content_name: "Jacket Flowers corto",
+          content_category: "Jacket",
+          contact_method: "whatsapp",
           page: window.location.pathname
         });
       }
 
-      if (typeof gtag === 'function') {
-        gtag('event', 'click_whatsapp_jacket', {
-          event_category: 'conversion',
-          event_label: 'Jacket - botón WhatsApp',
+      if (typeof gtag === "function") {
+        gtag("event", "click_whatsapp_jacket", {
+          event_category: "conversion",
+          event_label: "Jacket - botón WhatsApp",
           color_seleccionado: color,
           talla_seleccionada: talla
         });
@@ -205,9 +214,38 @@ Imagen del modelo: ${urlImagen}`;
       }, 500);
     }
 
-    window.onload = function() {
+    document.addEventListener("DOMContentLoaded", function() {
       cargarImagen(indice);
-    };
+
+      if (typeof fbq === "function") {
+        fbq("track", "ViewContent", {
+          content_name: "Jacket Flowers corto",
+          content_category: "Jacket",
+          content_type: "product",
+          value: 24.99,
+          currency: "USD"
+        });
+      }
+
+      const tallaSelect = document.getElementById("talla");
+      if (tallaSelect) {
+        tallaSelect.addEventListener("change", function() {
+          const talla = this.value;
+          if (!talla) return;
+
+          if (typeof fbq === "function") {
+            fbq("track", "AddToCart", {
+              content_name: "Jacket Flowers corto",
+              content_category: "Jacket",
+              content_type: "product",
+              size: talla,
+              value: 24.99,
+              currency: "USD"
+            });
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

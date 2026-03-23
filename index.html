@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Metaetiqueta para verificación de dominio -->
   <meta name="facebook-domain-verification" content="8hho9jfgwmg2x6wcmlthi3pidka57o" />
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -14,7 +12,6 @@
   />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph básico -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="ÑukawaStudio | Jacket Flowers" />
   <meta
@@ -24,18 +21,16 @@
   <meta property="og:image" content="https://www.nukawastudio.com/assets/images/jacket/jacket_terracota.png" />
   <meta property="og:url" content="https://www.nukawastudio.com/" />
 
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/images/favicon.png" />
-
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Meta Pixel Code -->
+  <!-- Meta Pixel -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
-    n.queue=[]; t=b.createElement(e); t.async=!0;
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
@@ -52,9 +47,8 @@
       alt=""
     />
   </noscript>
-  <!-- End Meta Pixel Code -->
 
-  <!-- Google Analytics 4 -->
+  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -64,7 +58,6 @@
 
     let scrollTracked = false;
 
-    // Evento para botón WhatsApp (GA4 + Meta)
     function trackWhatsappClick(e) {
       if (typeof gtag === 'function') {
         gtag('event', 'click_whatsapp', {
@@ -75,6 +68,8 @@
 
       if (typeof fbq === 'function') {
         fbq('track', 'Contact', {
+          content_name: 'WhatsApp Home',
+          content_category: 'Contacto',
           contact_method: 'whatsapp',
           page: window.location.pathname
         });
@@ -89,7 +84,6 @@
       }
     }
 
-    // Evento para formulario
     function trackLeadSubmit() {
       if (typeof gtag === 'function') {
         gtag('event', 'lead_submit', {
@@ -100,13 +94,14 @@
 
       if (typeof fbq === 'function') {
         fbq('track', 'Lead', {
+          content_name: 'Formulario novedades',
+          content_category: 'Newsletter',
           form_name: 'newsletter_home',
           page: window.location.pathname
         });
       }
     }
 
-    // Evento de scroll al 50%
     window.addEventListener('scroll', function () {
       const scrollY = window.scrollY;
       const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -125,7 +120,6 @@
       }
     });
 
-    // Captura y envío de parámetros UTM
     window.addEventListener('load', function () {
       const urlParams = new URLSearchParams(window.location.search);
       const utm_source = urlParams.get('utm_source');
@@ -146,8 +140,8 @@
     });
   </script>
 
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
+  <!-- Clarity -->
+  <script>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
       t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
@@ -164,7 +158,6 @@
   </header>
 
   <main>
-    <!-- Botón principal de WhatsApp (Home) -->
     <section style="text-align:center; margin: 18px 0;">
       <a
         href="https://wa.me/593968604535?text=Hola%20me%20interesa%20Jacket%20Flowers"
@@ -175,7 +168,6 @@
       </a>
     </section>
 
-    <!-- Abrigo -->
     <section class="producto">
       <div class="imagen-principal">
         <img src="assets/images/abrigo/abrigo_color1.jpeg" alt="abrigo_color1" />
@@ -185,7 +177,6 @@
       <a href="productos/abrigo.html" class="boton">Ver más</a>
     </section>
 
-    <!-- Jacket -->
     <section class="producto">
       <div class="imagen-principal">
         <img src="assets/images/jacket/jacket_terracota.png" alt="Jacket color 1" />
@@ -195,7 +186,6 @@
       <a href="productos/jacket.html" class="boton">Ver más</a>
     </section>
 
-    <!-- Abrigo de Botones -->
     <section class="producto">
       <div class="imagen-principal">
         <img src="assets/images/botones/Abrigo_Beige.jpeg" alt="Abrigo_Beige.jpeg" />
@@ -205,7 +195,6 @@
       <a href="productos/botones.html" class="boton">Ver más</a>
     </section>
 
-    <!-- Testimonios -->
     <section class="testimonios">
       <h2>✨ Lo que dicen nuestras clientas</h2>
       <div class="testimonios-grid">
@@ -235,7 +224,6 @@
       </div>
     </section>
 
-    <!-- WhatsApp -->
     <section class="contacto">
       <h2>¿Tienes dudas o quieres tu chaqueta?</h2>
       <a
@@ -247,7 +235,6 @@
       </a>
     </section>
 
-    <!-- Formulario -->
     <section class="formulario">
       <h2>Recibe novedades exclusivas</h2>
       <form
