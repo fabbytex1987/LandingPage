@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <!-- Metaetiqueta para verificación de dominio (IMPORTANTE que esté al inicio del <head>) -->
+  <!-- Metaetiqueta para verificación de dominio -->
   <meta name="facebook-domain-verification" content="8hho9jfgwmg2x6wcmlthi3pidka57o" />
 
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jacket Flowers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>ÑukawaStudio | Jacket Flowers</title>
+  <meta
+    name="description"
+    content="ÑukawaStudio presenta Jacket Flowers: prendas cálidas, auténticas y artesanales desde Otavalo, Imbabura, Ecuador."
+  />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph básico -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ÑukawaStudio | Jacket Flowers" />
+  <meta
+    property="og:description"
+    content="Prendas cálidas, auténticas y artesanales desde Otavalo, Imbabura, Ecuador."
+  />
+  <meta property="og:image" content="https://www.nukawastudio.com/assets/images/jacket/jacket_terracota.png" />
+  <meta property="og:url" content="https://www.nukawastudio.com/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
   <link rel="stylesheet" href="styles.css" />
 
   <!-- Meta Pixel Code -->
@@ -19,13 +39,18 @@
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
-    
+
     fbq('init', '1280001277161893');
     fbq('track', 'PageView');
   </script>
   <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"/>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"
+      alt=""
+    />
   </noscript>
   <!-- End Meta Pixel Code -->
 
@@ -33,57 +58,90 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-QE5BRPJKCV');
 
-    // Evento para botón WhatsApp
-    function trackWhatsappClick() {
-      gtag('event', 'click_whatsapp', {
-        'event_category': 'conversion',
-        'event_label': 'WhatsApp desde home'
-      });
-      fbq('track', 'Contact'); // Evento personalizado para Meta
+    let scrollTracked = false;
+
+    // Evento para botón WhatsApp (GA4 + Meta)
+    function trackWhatsappClick(e) {
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_whatsapp', {
+          event_category: 'conversion',
+          event_label: 'WhatsApp desde home'
+        });
+      }
+
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact', {
+          contact_method: 'whatsapp',
+          page: window.location.pathname
+        });
+      }
+
+      if (e && e.currentTarget && e.currentTarget.href) {
+        e.preventDefault();
+        const url = e.currentTarget.href;
+        setTimeout(function () {
+          window.location.href = url;
+        }, 180);
+      }
     }
 
     // Evento para formulario
     function trackLeadSubmit() {
-      gtag('event', 'lead_submit', {
-        'event_category': 'formulario',
-        'event_label': 'Formulario de contacto'
-      });
+      if (typeof gtag === 'function') {
+        gtag('event', 'lead_submit', {
+          event_category: 'formulario',
+          event_label: 'Formulario de contacto'
+        });
+      }
+
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          form_name: 'newsletter_home',
+          page: window.location.pathname
+        });
+      }
     }
 
     // Evento de scroll al 50%
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       const scrollY = window.scrollY;
       const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (pageHeight <= 0) return;
+
       const scrollPercent = (scrollY / pageHeight) * 100;
 
-      if (scrollPercent > 50 && !window.scrollTracked) {
-        gtag('event', 'scroll_50', {
-          'event_category': 'engagement',
-          'event_label': 'Scroll 50% completado'
-        });
-        window.scrollTracked = true;
+      if (scrollPercent > 50 && !scrollTracked) {
+        if (typeof gtag === 'function') {
+          gtag('event', 'scroll_50', {
+            event_category: 'engagement',
+            event_label: 'Scroll 50% completado'
+          });
+        }
+        scrollTracked = true;
       }
     });
 
     // Captura y envío de parámetros UTM
-    window.addEventListener('load', function() {
+    window.addEventListener('load', function () {
       const urlParams = new URLSearchParams(window.location.search);
       const utm_source = urlParams.get('utm_source');
       const utm_medium = urlParams.get('utm_medium');
       const utm_campaign = urlParams.get('utm_campaign');
 
       if (utm_source || utm_medium || utm_campaign) {
-        gtag('event', 'utm_capture', {
-          'event_category': 'utm_tracking',
-          'event_label': 'Parámetros UTM detectados',
-          'utm_source': utm_source,
-          'utm_medium': utm_medium,
-          'utm_campaign': utm_campaign
-        });
+        if (typeof gtag === 'function') {
+          gtag('event', 'utm_capture', {
+            event_category: 'utm_tracking',
+            event_label: 'Parámetros UTM detectados',
+            utm_source: utm_source || '',
+            utm_medium: utm_medium || '',
+            utm_campaign: utm_campaign || ''
+          });
+        }
       }
     });
   </script>
@@ -91,25 +149,36 @@
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r); t.async=1; t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "sn9scd20px");
   </script>
 </head>
 
 <body>
   <header>
-    <h1>🌸 Jacket Flowers</h1>
+    <h1>🌸 ÑukawaStudio</h1>
     <p>No sigas modas. Crea momentos.</p>
     <p>Elige tu estilo y déjate envolver por lo natural y auténtico.</p>
   </header>
 
   <main>
+    <!-- Botón principal de WhatsApp (Home) -->
+    <section style="text-align:center; margin: 18px 0;">
+      <a
+        href="https://wa.me/593968604535?text=Hola%20me%20interesa%20Jacket%20Flowers"
+        class="boton"
+        onclick="trackWhatsappClick(event)"
+      >
+        Hablar por WhatsApp
+      </a>
+    </section>
+
     <!-- Abrigo -->
     <section class="producto">
       <div class="imagen-principal">
-        <img src="assets/images/abrigo/abrigo_habano.png" alt="abrigo_habano" />
+        <img src="assets/images/abrigo/abrigo_color1.jpeg" alt="abrigo_color1" />
       </div>
       <h2>Abrigo Floral Largo 3/4</h2>
       <p>Ideal para momentos especiales. Cálido, elegante y único.</p>
@@ -126,6 +195,16 @@
       <a href="productos/jacket.html" class="boton">Ver más</a>
     </section>
 
+    <!-- Abrigo de Botones -->
+    <section class="producto">
+      <div class="imagen-principal">
+        <img src="assets/images/botones/Abrigo_Beige.jpeg" alt="Abrigo_Beige.jpeg" />
+      </div>
+      <h2>Abrigo Elegante con Botones</h2>
+      <p>Diseñado para brindarte calidez, elegancia y comodidad en cada momento.</p>
+      <a href="productos/botones.html" class="boton">Ver más</a>
+    </section>
+
     <!-- Testimonios -->
     <section class="testimonios">
       <h2>✨ Lo que dicen nuestras clientas</h2>
@@ -135,28 +214,55 @@
           <p class="nombre">Doris.</p>
           <p class="comentario">"¡Llego! La Jacket Flowers refleja mi esencia. 🧡"</p>
         </div>
+
         <div class="testimonio">
           <img src="assets/images/testimonios/cliente2.jpg" alt="Testimonio 2" />
           <p class="nombre">Maria de la Cruz</p>
           <p class="comentario">"Es para un regalo, la persona que la recibe estara muy feliz."</p>
         </div>
+
         <div class="testimonio">
           <img src="assets/images/testimonios/cliente3.jpg" alt="Testimonio 3" />
           <p class="nombre">Sandra Valdez.</p>
           <p class="comentario">"Todos me preguntan dónde la compré. ¡Esta hermosa la chaqueta! 😍"</p>
         </div>
+
         <div class="testimonio">
-          <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 3" />
+          <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 4" />
           <p class="nombre">Post Facebook.</p>
           <p class="comentario">"Acaso existe algo mas bello que los lindos comentarios cuando reciben sus Jacket Flowers version Abrigo 😍"</p>
         </div>
       </div>
     </section>
 
-    <!-- Formulario (opcional) -->
+    <!-- WhatsApp -->
+    <section class="contacto">
+      <h2>¿Tienes dudas o quieres tu chaqueta?</h2>
+      <a
+        href="https://wa.me/593968604535?text=Hola!%20Quiero%20más%20info%20sobre%20las%20prendas"
+        class="boton"
+        onclick="trackWhatsappClick(event)"
+      >
+        Escríbenos por WhatsApp
+      </a>
+    </section>
+
+    <!-- Formulario -->
     <section class="formulario">
       <h2>Recibe novedades exclusivas</h2>
-      <form onsubmit="trackLeadSubmit()">
+      <form
+        name="newsletter-home"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        onsubmit="trackLeadSubmit()"
+      >
+        <input type="hidden" name="form-name" value="newsletter-home" />
+
+        <p style="display:none;">
+          <label>No llenar este campo: <input name="bot-field" /></label>
+        </p>
+
         <input type="text" name="nombre" placeholder="Tu nombre" required />
         <input type="email" name="email" placeholder="Tu correo" required />
         <button type="submit">Suscribirme</button>
@@ -165,7 +271,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
+    <p>&copy; 2026 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
   </footer>
 </body>
 </html>
