@@ -39,10 +39,6 @@
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
-<<<<<<< HEAD
-=======
-    
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
 
     fbq('init', '1280001277161893');
     fbq('track', 'PageView');
@@ -66,7 +62,6 @@
     gtag('js', new Date());
     gtag('config', 'G-QE5BRPJKCV');
 
-<<<<<<< HEAD
     let scrollTracked = false;
 
     // Evento para botón WhatsApp (GA4 + Meta)
@@ -91,37 +86,10 @@
         setTimeout(function () {
           window.location.href = url;
         }, 180);
-=======
-    // Evento para botón WhatsApp
-    function trackWhatsappClick() 
-    // Evento para botón WhatsApp (GA4 + Meta)
-    function trackWhatsappClick(e) {
-      // 1) GA4
-      gtag('event', 'click_whatsapp', {
-        'event_category': 'conversion',
-        'event_label': 'WhatsApp desde home'
-        event_category: 'conversion',
-        event_label: 'WhatsApp desde home'
-      });
-
-      // 2) Meta Pixel (evento estándar Contact + parámetro)
-      fbq('track', 'Contact', {
-        contact_method: 'whatsapp',
-        page: window.location.pathname
-      });
-      fbq('track', 'Contact'); // Evento personalizado para Meta
-
-      // 3) Asegurar que el evento se envíe antes de salir a WhatsApp (recomendado)
-      if (e && e.currentTarget && e.currentTarget.href) {
-        e.preventDefault();
-        const url = e.currentTarget.href;
-        setTimeout(() => { window.location.href = url; }, 180);
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
       }
     }
 
     // Evento para formulario
-<<<<<<< HEAD
     function trackLeadSubmit() {
       if (typeof gtag === 'function') {
         gtag('event', 'lead_submit', {
@@ -136,21 +104,6 @@
           page: window.location.pathname
         });
       }
-=======
-    function trackLeadSubmit() 
-    // Evento para formulario (GA4)
-    function trackLeadSubmit(e) {
-      gtag('event', 'lead_submit', {
-        'event_category': 'formulario',
-        'event_label': 'Formulario de contacto'
-        event_category: 'formulario',
-        event_label: 'Formulario de contacto'
-      });
-      // (Opcional) Si quieres también medir Lead en Meta:
-      // fbq('track', 'Lead');
-      // Si tu formulario no debe recargar la página, descomenta:
-      // e.preventDefault();
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
     }
 
     // Evento de scroll al 50%
@@ -161,7 +114,6 @@
 
       const scrollPercent = (scrollY / pageHeight) * 100;
 
-<<<<<<< HEAD
       if (scrollPercent > 50 && !scrollTracked) {
         if (typeof gtag === 'function') {
           gtag('event', 'scroll_50', {
@@ -170,33 +122,17 @@
           });
         }
         scrollTracked = true;
-=======
-      if (scrollPercent > 50 && !window.scrollTracked) {
-        gtag('event', 'scroll_50', {
-          'event_category': 'engagement',
-          'event_label': 'Scroll 50% completado'
-          event_category: 'engagement',
-          event_label: 'Scroll 50% completado'
-        });
-        window.scrollTracked = true;
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
       }
     });
 
     // Captura y envío de parámetros UTM
-<<<<<<< HEAD
     window.addEventListener('load', function () {
-=======
-    // Captura y envío de parámetros UTM (GA4)
-    window.addEventListener('load', function() {
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
       const urlParams = new URLSearchParams(window.location.search);
       const utm_source = urlParams.get('utm_source');
       const utm_medium = urlParams.get('utm_medium');
       const utm_campaign = urlParams.get('utm_campaign');
 
       if (utm_source || utm_medium || utm_campaign) {
-<<<<<<< HEAD
         if (typeof gtag === 'function') {
           gtag('event', 'utm_capture', {
             event_category: 'utm_tracking',
@@ -206,20 +142,6 @@
             utm_campaign: utm_campaign || ''
           });
         }
-=======
-        gtag('event', 'utm_capture', {
-          'event_category': 'utm_tracking',
-          'event_label': 'Parámetros UTM detectados',
-          'utm_source': utm_source,
-          'utm_medium': utm_medium,
-          'utm_campaign': utm_campaign
-          event_category: 'utm_tracking',
-          event_label: 'Parámetros UTM detectados',
-          utm_source: utm_source,
-          utm_medium: utm_medium,
-          utm_campaign: utm_campaign
-        });
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
       }
     });
   </script>
@@ -236,21 +158,13 @@
 
 <body>
   <header>
-<<<<<<< HEAD
     <h1>🌸 ÑukawaStudio</h1>
-=======
-    <h1>🌸 ÑukawaStudio </h1>
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
     <p>No sigas modas. Crea momentos.</p>
     <p>Elige tu estilo y déjate envolver por lo natural y auténtico.</p>
   </header>
 
   <main>
     <!-- Botón principal de WhatsApp (Home) -->
-<<<<<<< HEAD
-=======
-    <!-- IMPORTANTE: Reemplaza el número por tu WhatsApp en formato internacional sin + -->
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
     <section style="text-align:center; margin: 18px 0;">
       <a
         href="https://wa.me/593968604535?text=Hola%20me%20interesa%20Jacket%20Flowers"
@@ -281,11 +195,7 @@
       <a href="productos/jacket.html" class="boton">Ver más</a>
     </section>
 
-<<<<<<< HEAD
     <!-- Abrigo de Botones -->
-=======
-    <!-- >Abrigo de Botones -->
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
     <section class="producto">
       <div class="imagen-principal">
         <img src="assets/images/botones/Abrigo_Beige.jpeg" alt="Abrigo_Beige.jpeg" />
@@ -318,10 +228,6 @@
         </div>
 
         <div class="testimonio">
-<<<<<<< HEAD
-=======
-          <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 3" />
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
           <img src="assets/images/testimonios/cliente4.jpg" alt="Testimonio 4" />
           <p class="nombre">Post Facebook.</p>
           <p class="comentario">"Acaso existe algo mas bello que los lindos comentarios cuando reciben sus Jacket Flowers version Abrigo 😍"</p>
@@ -344,7 +250,6 @@
     <!-- Formulario -->
     <section class="formulario">
       <h2>Recibe novedades exclusivas</h2>
-<<<<<<< HEAD
       <form
         name="newsletter-home"
         method="POST"
@@ -358,10 +263,6 @@
           <label>No llenar este campo: <input name="bot-field" /></label>
         </p>
 
-=======
-      <form onsubmit="trackLeadSubmit()">
-      <form onsubmit="trackLeadSubmit(event)">
->>>>>>> ddbbe0f4c0a097664b7c5d3a120feb0c5ae8bd8a
         <input type="text" name="nombre" placeholder="Tu nombre" required />
         <input type="email" name="email" placeholder="Tu correo" required />
         <button type="submit">Suscribirme</button>

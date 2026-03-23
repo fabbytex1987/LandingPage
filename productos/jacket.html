@@ -3,16 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jacket Flowers</title>
+  <title>ÑukawaStudio | Jacket Flowers corto</title>
+
+  <meta
+    name="description"
+    content="Jacket Flowers corto de ÑukawaStudio. Versátil, cómodo y lleno de personalidad para el día a día."
+  />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="product" />
+  <meta property="og:title" content="ÑukawaStudio | Jacket Flowers corto" />
+  <meta
+    property="og:description"
+    content="Explora los colores disponibles de Jacket Flowers corto y realiza tu pedido por WhatsApp."
+  />
+  <meta property="og:url" content="https://www.nukawastudio.com/productos/jacket.html" />
+  <meta property="og:image" content="https://www.nukawastudio.com/assets/images/jacket/jacket_color1.webp" />
+
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
   <link rel="stylesheet" href="../styles.css" />
 
   <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKL0NZ9LVN"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QE5BRPJKCV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-EKL0NZ9LVN');
+    gtag('config', 'G-QE5BRPJKCV');
   </script>
 
   <!-- Meta Pixel Code -->
@@ -25,12 +41,17 @@
     t.src='https://connect.facebook.net/en_US/fbevents.js';
     s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script');
-    fbq('init', '1280001277161893'); // Reemplaza con tu Pixel ID si es distinto
+
+    fbq('init', '1280001277161893');
     fbq('track', 'PageView');
   </script>
   <noscript>
-    <img height="1" width="1" style="display:none"
+    <img
+      height="1"
+      width="1"
+      style="display:none"
       src="https://www.facebook.com/tr?id=1280001277161893&ev=PageView&noscript=1"
+      alt=""
     />
   </noscript>
   <!-- End Meta Pixel Code -->
@@ -38,37 +59,38 @@
   <!-- Microsoft Clarity -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "sn9scd20px");
   </script>
 </head>
 
 <body>
   <header>
-    <h1>🌸 Jacket Flowers corto</h1>
+    <h1>🌸 ÑukawaStudio</h1>
+    <p><strong>Jacket Flowers corto</strong></p>
     <p>Perfecto para el día a día. Versátil, cómodo y lleno de personalidad.</p>
   </header>
 
   <main>
     <section class="producto-detalle">
       <div class="carrusel">
-        <img id="producto-img" src="" alt="Producto" />
+        <img id="producto-img" src="" alt="Producto" loading="lazy" />
         <div class="controles">
-          <button onclick="cambiarImagen(-1)">←</button>
-          <button onclick="cambiarImagen(1)">→</button>
+          <button type="button" onclick="cambiarImagen(-1)">←</button>
+          <button type="button" onclick="cambiarImagen(1)">→</button>
         </div>
       </div>
 
       <p id="nombre-color" style="font-weight: bold; margin-top: 10px;"></p>
 
-      <p>Explora los 6 colores disponibles y encuentra el que más refleje tu esencia.</p>
+      <p>Explora los colores disponibles y encuentra el que más refleje tu esencia.</p>
 
       <label for="talla">Selecciona tu talla:</label>
       <select id="talla">
         <option value="">-- Selecciona --</option>
-        <option value="XS">S (Muy Pequeña)</option>
+        <option value="XS">XS (Muy Pequeña)</option>
         <option value="S">S (Pequeña)</option>
         <option value="M">M (Mediana)</option>
         <option value="L">L (Grande)</option>
@@ -76,13 +98,13 @@
         <option value="XXL">XXL (Doble Extra grande)</option>
       </select>
 
-      <button class="boton" onclick="ordenarWhatsApp()">🛍️ Ordenar por WhatsApp</button>
+      <button type="button" class="boton" onclick="ordenarWhatsApp()">🛍️ Ordenar por WhatsApp</button>
       <a href="../index.html" class="boton">← Volver al inicio</a>
     </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Jacket Flowers - Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
+    <p>&copy; 2026 ÑukawaStudio · Jacket Flowers · Con amor desde Otavalo-Imbabura-Ecuador 🌿</p>
   </footer>
 
   <script>
@@ -96,7 +118,7 @@
       "Camel",
       "Beige",
       "Negro",
-      "Café",
+      "Café"
     ];
 
     function cambiarImagen(direccion) {
@@ -123,20 +145,24 @@
 
       const testSrc = basePath + extensiones[index];
       const testImg = new Image();
-      testImg.onload = () => {
+
+      testImg.onload = function() {
         imgElement.src = testSrc;
-        imgElement.alt = nombresColores[num - 1];
+        imgElement.alt = `Jacket Flowers corto color ${nombresColores[num - 1]}`;
         nombreColorElement.textContent = `Color: ${nombresColores[num - 1]}`;
         imagenSeleccionada = testSrc;
       };
-      testImg.onerror = () => {
+
+      testImg.onerror = function() {
         probarExtension(basePath, index + 1, imgElement, nombreColorElement, num);
       };
+
       testImg.src = testSrc;
     }
 
     function ordenarWhatsApp() {
       const talla = document.getElementById("talla").value;
+
       if (!talla) {
         alert("Por favor, selecciona una talla.");
         return;
@@ -146,33 +172,42 @@
       const numero = "593968604535";
       const urlImagen = `${window.location.origin}/${imagenSeleccionada.replace("../", "")}`;
 
-      const mensaje = `Hola 👋, me interesa la *Jacket Flowers* en:\n👕 Color: ${color}\n📏 Talla: ${talla}\n📸 Imagen del modelo: ${urlImagen}`;
+      const mensaje = `Hola 👋, me interesa la Jacket Flowers corto de ÑukawaStudio.
+
+Color: ${color}
+Talla: ${talla}
+Imagen del modelo: ${urlImagen}`;
+
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
 
-      // EVENTO para Meta Pixel con chequeo
       if (typeof fbq === 'function') {
         fbq('track', 'Contact', {
-          content_name: 'Jacket Flowers',
-          content_category: 'Abrigos',
+          content_name: 'Jacket Flowers corto',
+          content_category: 'Jacket',
           value: 1,
-          currency: 'USD'
+          currency: 'USD',
+          contact_method: 'whatsapp',
+          page: window.location.pathname
         });
       }
 
-      // EVENTO para Google Analytics
-      gtag('event', 'click_whatsapp_jacket', {
-        'event_category': 'conversion',
-        'event_label': 'Jacket - botón WhatsApp'
-      });
+      if (typeof gtag === 'function') {
+        gtag('event', 'click_whatsapp_jacket', {
+          event_category: 'conversion',
+          event_label: 'Jacket - botón WhatsApp',
+          color_seleccionado: color,
+          talla_seleccionada: talla
+        });
+      }
 
-      // Espera 500ms para enviar eventos antes de abrir WhatsApp
-      setTimeout(() => {
+      setTimeout(function() {
         window.open(url, "_blank");
       }, 500);
     }
 
-    // Cargar imagen inicial al cargar la página
-    window.onload = () => cargarImagen(indice);
+    window.onload = function() {
+      cargarImagen(indice);
+    };
   </script>
 </body>
 </html>
