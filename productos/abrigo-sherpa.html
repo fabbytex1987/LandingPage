@@ -109,9 +109,9 @@
       const numero="593968604535";
       const imagen=window.location.origin+"/assets/images/abrigo/abrigo-sherpa-beige.webp";
       const mensaje=`¡Hola! Quiero ordenar el *Abrigo Sherpa Texturizado*.
-👗 Talla: ${talla}
-🎨 Color: Beige
-🖼️ Imagen: ${imagen}`;
+Talla: ${talla}
+Color: Beige
+Imagen: ${imagen}`;
       if(typeof fbq==="function"){
         fbq("track","InitiateCheckout",{content_name:"Abrigo Sherpa Texturizado",content_category:"Abrigo",content_type:"product",value:24.99,currency:"USD"});
         fbq("track","Contact",{content_name:"Abrigo Sherpa Texturizado",content_category:"Abrigo",contact_method:"whatsapp",page:window.location.pathname});
